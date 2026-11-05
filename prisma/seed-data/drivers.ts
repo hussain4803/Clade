@@ -1,0 +1,156 @@
+/** Fictional driver roster. Any resemblance to real drivers is coincidental. */
+export type SeedDriver = {
+  slug: string;
+  firstName: string;
+  lastName: string;
+  number: number;
+  role: string;
+  carNumber: "18" | "81" | "RESERVE";
+  nationality: string;
+  countryCode: string;
+  birthYear: number;
+  rating: string;
+  bio: string;
+  quote: string;
+  starts: number;
+  wins: number;
+  podiums: number;
+  poles: number;
+  helmet: { shell: string; stripe: string; accent: string; visor: string };
+};
+
+export const DRIVERS: SeedDriver[] = [
+  {
+    slug: "mara-lindqvist",
+    firstName: "Mara",
+    lastName: "Lindqvist",
+    number: 8,
+    role: "Lead Driver · Car #18",
+    carNumber: "18",
+    nationality: "Swedish",
+    countryCode: "SE",
+    birthYear: 1994,
+    rating: "Platinum",
+    bio: "A former single-seater champion who switched to prototypes in her mid-twenties, Mara is the reference for consistency in the team. She usually takes the start and the final stint, and leads the #18 crew's set-up direction with the race engineers.",
+    quote: "Fast laps win qualifying. Identical laps win Le Mans.",
+    starts: 64,
+    wins: 9,
+    podiums: 27,
+    poles: 6,
+    helmet: { shell: "#F5F7FA", stripe: "#00A3FF", accent: "#0B0D10", visor: "#1B3A5A" },
+  },
+  {
+    slug: "kenji-arakawa",
+    firstName: "Kenji",
+    lastName: "Arakawa",
+    number: 23,
+    role: "Driver · Car #18",
+    carNumber: "18",
+    nationality: "Japanese",
+    countryCode: "JP",
+    birthYear: 1997,
+    rating: "Platinum",
+    bio: "Kenji is the team's night specialist. His tyre management through the cool hours between midnight and dawn has repeatedly turned triple stints into track position, and he is a regular contributor to the simulator programme.",
+    quote: "At 3 a.m. the track is quiet, but the car is talking to you the whole time.",
+    starts: 51,
+    wins: 6,
+    podiums: 19,
+    poles: 3,
+    helmet: { shell: "#0B0D10", stripe: "#FF6B00", accent: "#F5F7FA", visor: "#3A2A1A" },
+  },
+  {
+    slug: "theo-valcourt",
+    firstName: "Théo",
+    lastName: "Valcourt",
+    number: 44,
+    role: "Driver · Car #18",
+    carNumber: "18",
+    nationality: "French",
+    countryCode: "FR",
+    birthYear: 1999,
+    rating: "Gold",
+    bio: "Promoted from the team's young driver academy, Théo brings raw one-lap speed and a deep knowledge of the Circuit de la Sarthe from his junior prototype years. He handles most of the #18's qualifying runs.",
+    quote: "Home race, home crowd, home team. There is no better pressure.",
+    starts: 28,
+    wins: 3,
+    podiums: 9,
+    poles: 4,
+    helmet: { shell: "#00A3FF", stripe: "#F5F7FA", accent: "#0B0D10", visor: "#0E2236" },
+  },
+  {
+    slug: "isabela-duarte",
+    firstName: "Isabela",
+    lastName: "Duarte",
+    number: 12,
+    role: "Lead Driver · Car #81",
+    carNumber: "81",
+    nationality: "Brazilian",
+    countryCode: "BR",
+    birthYear: 1996,
+    rating: "Platinum",
+    bio: "Isabela led the #81 to the team's first Hypercar victory at Spa. Known for aggressive but clean racecraft in traffic, she is at her best in changeable conditions and is the crew's lead voice on strategy calls from the cockpit.",
+    quote: "Rain is just another strategy option.",
+    starts: 58,
+    wins: 7,
+    podiums: 22,
+    poles: 5,
+    helmet: { shell: "#FF6B00", stripe: "#0B0D10", accent: "#F5F7FA", visor: "#2A1608" },
+  },
+  {
+    slug: "callum-rourke",
+    firstName: "Callum",
+    lastName: "Rourke",
+    number: 31,
+    role: "Driver · Car #81",
+    carNumber: "81",
+    nationality: "Irish",
+    countryCode: "IE",
+    birthYear: 1992,
+    rating: "Platinum",
+    bio: "The most experienced driver on the roster, Callum has more than a decade of endurance racing behind him. He mentors the younger drivers, leads the team's driver-change rehearsals and is famously calm when the race goes sideways.",
+    quote: "You can't win it in the first hour. You can definitely lose it.",
+    starts: 96,
+    wins: 11,
+    podiums: 34,
+    poles: 4,
+    helmet: { shell: "#14181D", stripe: "#22C55E", accent: "#F5F7FA", visor: "#13261A" },
+  },
+  {
+    slug: "nadia-okonkwo",
+    firstName: "Nadia",
+    lastName: "Okonkwo",
+    number: 57,
+    role: "Driver · Car #81",
+    carNumber: "81",
+    nationality: "British",
+    countryCode: "GB",
+    birthYear: 2001,
+    rating: "Gold",
+    bio: "Nadia joined the factory squad in 2026 after two standout seasons in GT endurance racing. Her rookie year included victory at Spa in only her fifth Hypercar start and a second-place finish in São Paulo.",
+    quote: "Every stint is a chance to learn something the data can't tell you.",
+    starts: 19,
+    wins: 2,
+    podiums: 6,
+    poles: 1,
+    helmet: { shell: "#F5F7FA", stripe: "#FF6B00", accent: "#00A3FF", visor: "#2A1B10" },
+  },
+  {
+    slug: "luca-ferrandi",
+    firstName: "Luca",
+    lastName: "Ferrandi",
+    number: 96,
+    role: "Reserve & Simulator Driver",
+    carNumber: "RESERVE",
+    nationality: "Italian",
+    countryCode: "IT",
+    birthYear: 2002,
+    rating: "Silver",
+    bio: "Luca spends more time in the simulator than anyone in the team — and joins the #81 line-up for the longer North American endurance rounds. He is responsible for validating set-up changes before they reach the race cars.",
+    quote: "If it works in the sim at 4 a.m., it works at Le Mans at 4 a.m.",
+    starts: 12,
+    wins: 1,
+    podiums: 3,
+    poles: 0,
+    helmet: { shell: "#9AA4AF", stripe: "#00A3FF", accent: "#0B0D10", visor: "#14181D" },
+  },
+];

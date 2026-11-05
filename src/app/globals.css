@@ -1,0 +1,324 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Apex Velocita Racing — design tokens
+   ------------------------------------------------------------------ */
+:root {
+  --avr-background: #0b0d10; /* deep carbon black */
+  --avr-surface: #14181d; /* dark graphite */
+  --avr-surface-2: #1b2027;
+  --avr-line: rgb(245 247 250 / 0.09);
+  --avr-line-strong: rgb(245 247 250 / 0.18);
+  --avr-blue: #00a3ff; /* electric racing blue */
+  --avr-orange: #ff6b00; /* endurance orange */
+  --avr-white: #f5f7fa; /* clean white */
+  --avr-muted: #9aa4af; /* cool gray */
+  --avr-success: #22c55e;
+  --avr-danger: #ef4444;
+  --avr-header-h: 4rem;
+
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-carbon: var(--avr-background);
+  --color-graphite: var(--avr-surface);
+  --color-graphite-2: var(--avr-surface-2);
+  --color-line: var(--avr-line);
+  --color-line-strong: var(--avr-line-strong);
+  --color-apex-blue: var(--avr-blue);
+  --color-apex-orange: var(--avr-orange);
+  --color-chalk: var(--avr-white);
+  --color-steel: var(--avr-muted);
+  --color-success: var(--avr-success);
+  --color-danger: var(--avr-danger);
+
+  --font-display: var(--font-chakra-petch), "Chakra Petch", ui-sans-serif, sans-serif;
+  --font-sans: var(--font-manrope), "Manrope", ui-sans-serif, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace, monospace;
+
+  /* Fluid type scale */
+  --text-display-xl: clamp(2.75rem, 1.4rem + 6.2vw, 7.5rem);
+  --text-display-xl--line-height: 0.9;
+  --text-display-lg: clamp(2.25rem, 1.4rem + 3.6vw, 4.75rem);
+  --text-display-lg--line-height: 0.95;
+  --text-display-md: clamp(1.75rem, 1.25rem + 2vw, 3rem);
+  --text-display-md--line-height: 1.05;
+  --text-display-sm: clamp(1.35rem, 1.1rem + 0.9vw, 1.85rem);
+  --text-display-sm--line-height: 1.15;
+  --text-lead: clamp(1.0625rem, 0.98rem + 0.35vw, 1.3rem);
+  --text-lead--line-height: 1.6;
+
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-pulse-dot: pulse-dot 1.6s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------ */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--avr-header-h) + 1rem);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background-color: var(--avr-background);
+    color: var(--avr-white);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+    min-height: 100dvh;
+  }
+
+  /* Subtle asphalt grain across the whole site */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--avr-blue);
+    color: var(--avr-background);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--avr-blue);
+    outline-offset: 3px;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+  }
+
+  img,
+  svg,
+  video {
+    max-width: 100%;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Textures & decorative utilities
+   ------------------------------------------------------------------ */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(245 247 250 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(245 247 250 / 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@utility bg-grid-fine {
+  background-image:
+    linear-gradient(to right, rgb(245 247 250 / 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(245 247 250 / 0.035) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+@utility bg-carbon-weave {
+  background-color: var(--avr-surface);
+  background-image:
+    repeating-linear-gradient(45deg, rgb(255 255 255 / 0.025) 0 2px, transparent 2px 6px),
+    repeating-linear-gradient(-45deg, rgb(0 0 0 / 0.35) 0 2px, transparent 2px 6px);
+}
+
+@utility stripe-diagonal {
+  background-image: repeating-linear-gradient(
+    -60deg,
+    var(--avr-orange) 0 10px,
+    transparent 10px 20px
+  );
+}
+
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--avr-white);
+}
+
+@utility chamfer {
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+}
+
+@utility chamfer-sm {
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Eyebrow / technical label */
+@utility label-tech {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.2;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------------
+   Motion
+   ------------------------------------------------------------------ */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes avr-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes avr-streak {
+  from {
+    transform: translateX(40%);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+}
+
+@keyframes avr-digit {
+  from {
+    transform: translateY(-35%);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes avr-light {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.avr-wheel-spin {
+  animation: avr-spin 0.9s linear infinite;
+}
+
+.avr-light-pulse {
+  animation: avr-light 2.4s ease-in-out infinite;
+}
+
+.avr-streak {
+  animation: avr-streak var(--dur, 2.8s) linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.avr-digit {
+  display: inline-block;
+  animation: avr-digit 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.page-enter {
+  animation: fade-up 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Section reveal: visible by default; Reveal marks below-the-fold elements "pending" after mount. */
+[data-reveal] {
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal="pending"] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: none;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--avr-surface) 0%, var(--avr-surface-2) 40%, var(--avr-surface) 80%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .avr-wheel-spin,
+  .avr-streak,
+  .avr-light-pulse,
+  .skeleton {
+    animation: none !important;
+  }
+
+  [data-reveal="pending"] {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,144 @@
+// Apex Velocita Racing — data model
+// All content seeded into this database is fictional sample data.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+/// An endurance event on the team calendar. Status (upcoming/live/completed)
+/// is derived from startDate/endDate at request time, never stored.
+model Race {
+  id              String        @id @default(cuid())
+  slug            String        @unique
+  name            String
+  shortName       String
+  /// "WEC" | "IMSA" — validated in application code
+  series          String
+  season          Int
+  round           Int
+  startDate       DateTime
+  endDate         DateTime
+  /// IANA time zone of the circuit, used to display local track time
+  timeZone        String
+  durationLabel   String
+  durationHours   Float
+  summary         String
+  description     String
+  circuitName     String
+  city            String
+  country         String
+  countryCode     String
+  circuitLengthKm Float
+  circuitTurns    Int
+  circuitNote     String
+  heroImage       String
+  sessions        RaceSession[]
+  results         RaceResult[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([startDate])
+  @@index([series, season])
+}
+
+model RaceSession {
+  id       String   @id @default(cuid())
+  raceId   String
+  race     Race     @relation(fields: [raceId], references: [id], onDelete: Cascade)
+  name     String
+  /// "PRACTICE" | "QUALIFYING" | "WARMUP" | "RACE"
+  kind     String
+  startsAt DateTime
+  endsAt   DateTime
+  order    Int
+
+  @@index([raceId, order])
+}
+
+/// Fictional classification for completed events (sample data only).
+model RaceResult {
+  id          String  @id @default(cuid())
+  raceId      String
+  race        Race    @relation(fields: [raceId], references: [id], onDelete: Cascade)
+  position    Int
+  carNumber   String
+  team        String
+  drivers     String
+  laps        Int
+  gap         String
+  bestLap     String
+  /// "CLASSIFIED" | "DNF"
+  status      String
+  isTeamEntry Boolean @default(false)
+
+  @@unique([raceId, position])
+}
+
+model Driver {
+  id          String @id @default(cuid())
+  slug        String @unique
+  firstName   String
+  lastName    String
+  number      Int    @unique
+  role        String
+  /// "18" | "81" | "RESERVE"
+  carNumber   String
+  nationality String
+  countryCode String
+  birthYear   Int
+  rating      String
+  bio         String
+  quote       String
+  helmetImage String
+  starts      Int
+  wins        Int
+  podiums     Int
+  poles       Int
+  order       Int
+}
+
+model Article {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  excerpt     String
+  /// Lightweight markup: paragraphs separated by blank lines, "## " headings, "> " pull quotes
+  body        String
+  category    String
+  tags        String
+  author      String
+  authorRole  String
+  coverImage  String
+  coverAlt    String
+  readMinutes Int
+  featured    Boolean  @default(false)
+  publishedAt DateTime
+
+  @@index([publishedAt])
+  @@index([category])
+}
+
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  topic     String
+  subject   String
+  message   String
+  status    String   @default("NEW")
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  source    String   @default("website")
+  createdAt DateTime @default(now())
+}
